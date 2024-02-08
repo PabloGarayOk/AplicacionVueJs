@@ -52,7 +52,10 @@ export default {
       axios.post('https://apirest.pablogaray.com.ar/auth.php', json)      
       .then ( data =>{
         if(data.data.status == "ok"){
-          console.log("todo bien loco")
+          // almacenamos el token en localStorage
+          localStorage.token = data.data.result.token;
+          // redireccionamos al dashboard
+          this.$router.push('dashboard');
         }else{
           this.error = true;
           this.error_msg = data.data.result.error_msg;
