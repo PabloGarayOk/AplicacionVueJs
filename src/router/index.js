@@ -2,19 +2,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import EditarView from '../views/EditarView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'HomeView',
     component: HomeView
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
+    name: 'DashboardView',
     component: DashboardView
+  },
+  {
+    // Ponemos la / para pasar la variable id del paciente que queremos editar
+    path: '/editar/:id',
+    name: 'EditarView',
+    component: EditarView
   },
 
 ]
