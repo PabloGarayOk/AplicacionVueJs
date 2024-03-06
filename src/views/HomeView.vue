@@ -45,6 +45,10 @@ export default {
         "user": this.user,
         "pass": this.pass,
       };
+      /* let json = {
+        "usuario": this.user,
+        "password": this.pass,
+      }; */
       // axios.post('http://api.solodata.es/auth.php', json)
       // axios.post('http://www.apirest.free.nf/auth.php', json)
       // axios.post('http://localhost/apis/api-pacientes/auth.php', json)

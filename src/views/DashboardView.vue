@@ -6,7 +6,7 @@
             <table class="table table-dark table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Paciente_Id</th>
+                        <th scope="col">Paciente Id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">DNI</th>
@@ -56,9 +56,11 @@ export default {
         }
     },    
     // para traer los datos a la tabla necesitamos una funcion del ciclo de vida del componente
-    // que se llama "mounted" y se ejecuta una vez que el componente alla sido montado.
+    // que se llama "mounted" y se ejecuta una vez que el componente haya sido montado.
     // le concatenamos la pagina para que pueda hacer la paginacion
     mounted:function(){
+        // let direccion = "http://api.solodata.es/pacientes.php?page=" + this.pagina;
+        // let direccion = 'http://www.apirest.free.nf/pacientes.php?page=' + this.pagina;
         let direccion = "https://apirest.pablogaray.com.ar/pacientes.php?page=" + this.pagina;
         axios.get(direccion).then( data => {
             this.listapacientes = data.data;
