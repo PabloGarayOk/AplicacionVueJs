@@ -3,6 +3,7 @@
         <AppHeader />
 
         <div class="container">
+            <button class="btn btn-primary left" v-on:click="nuevo()">Nuevo Paciente</button>
             <table class="table table-dark table-hover">
                 <thead>
                     <tr>
@@ -53,6 +54,9 @@ export default {
     methods:{
         editar(id){
             this.$router.push('editar/' + id);
+        },
+        nuevo(){
+            this.$router.push('nuevo/');
         }
     },    
     // para traer los datos a la tabla necesitamos una funcion del ciclo de vida del componente
@@ -70,4 +74,8 @@ export default {
 }
 </script>
 <style>
+.left{
+    float: left;
+    margin: 20px 0 20px 0;
+}
 </style>
