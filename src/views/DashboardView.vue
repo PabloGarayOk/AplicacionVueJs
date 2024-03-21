@@ -4,7 +4,8 @@
 
         <div class="container">
             <button class="btn btn-primary left" v-on:click="nuevo()">Nuevo Paciente</button>
-            <table class="table table-dark table-hover">
+            <button class="btn btn-primary right" v-on:click="cerrarSesion()">Cerrar Sesion</button>
+            <table class="table table-dark table-hover space-bottom-90">
                 <thead>
                     <tr>
                         <th scope="col">Paciente Id</th>
@@ -57,6 +58,10 @@ export default {
         },
         nuevo(){
             this.$router.push('nuevo/');
+        },
+        cerrarSesion(){
+            // localStorage.getItem("token") = "";
+            // this.$router.push('/');
         }
     },    
     // para traer los datos a la tabla necesitamos una funcion del ciclo de vida del componente
@@ -77,5 +82,12 @@ export default {
 .left{
     float: left;
     margin: 20px 0 20px 0;
+}
+.right{
+    float: right;
+    margin: 20px 0 20px 0;
+}
+.space-bottom-90 {
+    margin-bottom: 90px !important;
 }
 </style>

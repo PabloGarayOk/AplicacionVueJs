@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <!-- Mensaje de éxito -->
-        <div v-if="mostrarMensajeExito" class="alert alert-success mt-4" role="alert">
-            ¡El usuari@ se ha editado con éxito! ☑️
+        <div v-if="mostrarMensaje" class="alert alert-success mt-4" :role="tipo">
+            {{ mensaje }}
         </div>
         <form action="" class="form-horizontal mt-5">
             <!-- Fila 1 -->
@@ -77,7 +77,9 @@ export default {
   data() {
     return {
       form: this.formData, // Usa los datos recibidos en form
-      mostrarMensajeExito: false // Inicialmente, ocultamos el mensaje de éxito
+      mensaje: "", // Mensaje a mostrar
+      tipo: "", // Tipo de alerta
+      mostrarMensaje: false, // Inicialmente, ocultamos el mensaje
     }
   },
   methods:{
@@ -87,7 +89,8 @@ export default {
             .then(data => {// <<<--- aca se puede poner cualquier nombre ej: response
                 console.log(data); // Imprime la respuesta del servidor en la consola
                 // console.log(response.data); // Imprime una respuesta mas específica del servidor en la consola
-                this.mostrarMensajeExito = true; // Mostramos el mensaje de éxito
+                // this.mostrarMensajeExito = true; // Mostramos el mensaje de éxito
+                this.datosMensaje("Hecho", "¡El usuari@ se ha editado con éxito! ☑️", "alert", 3000);
             })
             .catch(error => {
                 console.error('Error al enviar la solicitud PUT:', error); // Imprime cualquier error que ocurra
@@ -106,13 +109,29 @@ export default {
             .then(response => {// <<<--- aca se puede poner cualquier nombre ej: response
                 // console.log(data); // Imprime la respuesta del servidor en la consola
                 console.log(response); // Imprime una respuesta mas específica del servidor en la consola
-                this.$router.push('/dashboard');
+                this.responseIdDelete = response.data.result.PacienteId;
+                if(response.data.status == "ok" && this.responseIdDelete == this.form.pacienteId){
+                    //this.mostrarMensaje("Hecho", `¡Usuari@ ${this.form.pacienteId} eliminado!. Redirigiendo al Dashboard. ☑️`, "alert", 3000);
+                    this.datosMensaje("Hecho", `¡Usuari@ ${this.responseIdDelete} eliminado!. Redirigiendo al Dashboard. ☑️`, "alert", 3000);
+                    setTimeout(() => {
+                        this.$router.push('/dashboard');
+                    }, 3000);
+                }            
             })
             .catch(error => {
                 console.error('Error al enviar la solicitud DELETE:', error); // Imprime cualquier error que ocurra
             });
+        },
+        datosMensaje(titulo, texto, tipo, delay) {
+            this.titulo = titulo;
+            this.mensaje = texto;
+            this.tipo = tipo;
+            this.mostrarMensaje = true;
+            setTimeout(() => {
+                this.mostrarMensaje = false;
+            }, delay);
         }
-    }
+    }    
 }
 </script>
 <style scoped>

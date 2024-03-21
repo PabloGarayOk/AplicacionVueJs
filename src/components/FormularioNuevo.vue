@@ -1,6 +1,9 @@
 <template>
     <div>
         <div class="container">
+            <div v-if="mostrarMensaje" class="alert alert-success mt-4" :role="tipo">
+                {{ mensaje }}
+            </div>
             <form action="" class="form-horizontal mt-5">
                 <!-- Fila 1 -->
                 <div class="row">
@@ -86,7 +89,9 @@ export default {
                 "email": "",
                 "token": ""
             },
-            // mostrarMensajeExito: false // Inicialmente, ocultamos el mensaje de éxito
+            mostrarMensaje: false, // Inicialmente, ocultamos el mensaje
+            mensaje: "", // Mensaje a mostrar
+            tipo: ""// Tipo de alerta
         };
     },
     methods:{
@@ -94,16 +99,39 @@ export default {
             const url = 'https://apirest.pablogaray.com.ar/pacientes.php';
             this.form.token = localStorage.getItem("token");
             axios.post(url, this.form)
-            .then(response => { // <<<--- aca se puede poner cualquier nombre ej: response
-                console.log(response); // Imprime una respuesta mas específica del servidor en la consola
-                // this.$router.push('/dashboard');
-            })
-            .catch(error => {
-                console.error('Error al enviar la solicitud DELETE:', error); // Imprime cualquier error que ocurra
-            });
+            .then(response => {
+            console.log(response);
+            // Limpiamos el formulario
+            this.form.dni = "",
+            this.form.nombre = "",
+            this.form.apellido = "",
+            this.form.genero = "",
+            this.form.fechaNacimiento = "",
+            this.form.direccion = "",
+            this.form.tel = "",
+            this.form.email = "",
+            // Capturamos el ID
+            this.responseId = response.data.result.pacienteId;
+            this.datosMensaje(`Paciente ID: ${this.responseId} agregado con éxito. Redirigiendo al Dashboard`, "alert", 3000);
+            setTimeout(() => {
+                this.$router.push('/dashboard');
+            }, 3000);            
+        })
+        .catch(error => {
+            console.error('Error al enviar la solicitud DELETE:', error);
+            this.datosMensaje("Error al guardar", "danger", 3000);
+        });
         },
         salir(){
             this.$router.push('/dashboard');
+        },
+        datosMensaje(texto, tipo, delay) {
+            this.mensaje = texto;
+            this.tipo = tipo;
+            this.mostrarMensaje = true;
+            setTimeout(() => {
+                this.mostrarMensaje = false;
+            }, delay);
         }
     }
 }
