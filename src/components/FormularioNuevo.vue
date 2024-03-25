@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group left">
-                            <label for="tel" class="control-label">Teléfono</label>
+                            <label for="tel" class="control-label">Teléfono *</label>
                             <input type="text" class="form-control" name="tel" id="tel" v-model="form.tel">
                         </div>
                     </div>
@@ -100,27 +100,34 @@ export default {
             this.form.token = localStorage.getItem("token");
             axios.post(url, this.form)
             .then(response => {
-            console.log(response);
-            // Limpiamos el formulario
-            this.form.dni = "",
-            this.form.nombre = "",
-            this.form.apellido = "",
-            this.form.genero = "",
-            this.form.fechaNacimiento = "",
-            this.form.direccion = "",
-            this.form.tel = "",
-            this.form.email = "",
-            // Capturamos el ID
-            this.responseId = response.data.result.pacienteId;
-            this.datosMensaje(`Paciente ID: ${this.responseId} agregado con éxito. Redirigiendo al Dashboard`, "alert", 3000);
-            setTimeout(() => {
-                this.$router.push('/dashboard');
-            }, 3000);            
-        })
-        .catch(error => {
-            console.error('Error al enviar la solicitud DELETE:', error);
-            this.datosMensaje("Error al guardar", "danger", 3000);
-        });
+                console.log(response);
+                // Capturamos el ID
+                this.responseId = response.data.result.pacienteId;
+                this.noInsert = "-1 no insertamos nada.";
+                if (this.responseId == this.noInsert){
+                    // Mostramos el mensaje de paciente NO guardado.
+                    this.datosMensaje(`No se guardo el paciente. Por favor complete los campos necesarios e intente nuevamente.`, "alert", 5000);
+                }else{
+                    // Limpiamos el formulario
+                    this.form.dni = "",
+                    this.form.nombre = "",
+                    this.form.apellido = "",
+                    this.form.genero = "",
+                    this.form.fechaNacimiento = "",
+                    this.form.direccion = "",
+                    this.form.tel = "",
+                    this.form.email = "",          
+                    // Mostramos el mensaje de exito
+                    this.datosMensaje(`Paciente ID: ${this.responseId} agregado con éxito. Redirigiendo al Dashboard`, "alert", 3000);
+                    setTimeout(() => {
+                        this.$router.push('/dashboard');
+                    }, 3000);
+                }        
+            })
+            .catch(error => {
+                console.error('Error al enviar la solicitud DELETE:', error);
+                this.datosMensaje("Error al guardar", "danger", 3000);
+            });
         },
         salir(){
             this.$router.push('/dashboard');

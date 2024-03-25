@@ -89,7 +89,6 @@ export default {
             .then(data => {// <<<--- aca se puede poner cualquier nombre ej: response
                 console.log(data); // Imprime la respuesta del servidor en la consola
                 // console.log(response.data); // Imprime una respuesta mas específica del servidor en la consola
-                // this.mostrarMensajeExito = true; // Mostramos el mensaje de éxito
                 this.datosMensaje("Hecho", "¡El usuari@ se ha editado con éxito! ☑️", "alert", 3000);
             })
             .catch(error => {
@@ -111,7 +110,6 @@ export default {
                 console.log(response); // Imprime una respuesta mas específica del servidor en la consola
                 this.responseIdDelete = response.data.result.PacienteId;
                 if(response.data.status == "ok" && this.responseIdDelete == this.form.pacienteId){
-                    //this.mostrarMensaje("Hecho", `¡Usuari@ ${this.form.pacienteId} eliminado!. Redirigiendo al Dashboard. ☑️`, "alert", 3000);
                     this.datosMensaje("Hecho", `¡Usuari@ ${this.responseIdDelete} eliminado!. Redirigiendo al Dashboard. ☑️`, "alert", 3000);
                     setTimeout(() => {
                         this.$router.push('/dashboard');

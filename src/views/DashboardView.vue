@@ -68,8 +68,6 @@ export default {
     // que se llama "mounted" y se ejecuta una vez que el componente haya sido montado.
     // le concatenamos la pagina para que pueda hacer la paginacion
     mounted:function(){
-        // let direccion = "http://api.solodata.es/pacientes.php?page=" + this.pagina;
-        // let direccion = 'http://www.apirest.free.nf/pacientes.php?page=' + this.pagina;
         let direccion = "https://apirest.pablogaray.com.ar/pacientes.php?page=" + this.pagina;
         axios.get(direccion).then( data => {
             this.listapacientes = data.data;

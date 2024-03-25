@@ -57,23 +57,6 @@ export default {
             // console.log(this.form);
         })
     },
-    /* methods:{
-        editar(){
-        const url = 'https://apirest.pablogaray.com.ar/pacientes.php';
-        axios.put(url, this.form)
-            .then(data => {// <<<--- aca se puede poner cualquier nombre ej: response
-                console.log(data); // Imprime la respuesta del servidor en la consola
-                // console.log(response.data); // Imprime una respuesta mas específica del servidor en la consola
-                this.mostrarMensajeExito = true; // Mostramos el mensaje de éxito
-            })
-            .catch(error => {
-                console.error('Error al enviar la solicitud PUT:', error); // Imprime cualquier error que ocurra
-            });
-        },
-        salir(){
-            this.$router.push('/dashboard');
-        }
-    } */
 }
 </script>
 <style scoped>
