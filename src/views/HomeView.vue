@@ -6,6 +6,9 @@
     <!-- Icon -->
     <div class="fadeIn first">
       <img src="@/assets/vue.svg" id="icon" alt="User Icon" />
+      <p>Use los siguientes datos para acceder al Dashboard</p>
+      <p>Usuario: hola@pablogaray.com.ar</p>
+      <p>Contraseña: 123456</p>
     </div>
 
     <!-- Login Form -->
