@@ -10,6 +10,13 @@ The dashboard is part of a two-project setup:
 
 ---
 
+## Project Overview
+
+**Role:** Frontend Developer (Vue.js)  
+**Type:** Web Dashboard (SPA)  
+
+---
+
 ## Live Demo
 
 Dashboard  
@@ -122,6 +129,15 @@ Lint and fix files:
 ```bash
 npm run lint
 ```
+
+---
+
+## Lessons Learned
+
+- Consuming a real backend API highlighted the importance of consistent response formats.
+- Route params and state handling are critical for building clean CRUD workflows in Vue.js.
+- Clear user feedback (alerts and validations) improves usability even in simple dashboards.
+- Frontend projects benefit significantly from well-defined backend contracts.
 
 ---
 
